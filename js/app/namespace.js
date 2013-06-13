@@ -1,7 +1,7 @@
 /* Application namespace */
 
-define(['app/utils/store', 'jquery', 'thorax', 'backbone'],
-  function(Store, $, Thorax) {
+define(['app/utils/store', 'jquery', 'thorax', 'underscore', 'backbone'],
+  function(Store, $, Thorax, _) {
 
     // Create the Application object, Application.setView() will
     // place a view inside the {{layout-element}}
@@ -23,6 +23,8 @@ define(['app/utils/store', 'jquery', 'thorax', 'backbone'],
     Application.libs = {
       '$': $,
       'jQuery': $,
+      '_', _,
+
       'Backbone': Backbone
     };
 
