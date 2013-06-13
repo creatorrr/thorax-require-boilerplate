@@ -1,1 +1,1 @@
-../components/underscore/underscore.js
+../components/underscore-amd/underscore.js
