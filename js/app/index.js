@@ -1,6 +1,6 @@
 /* Index file. */
 
-define(['jquery', 'thorax', 'modernizr'], function($, Thorax) {
+define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
   // Declare vars.
   var compatible, init;
 
@@ -12,46 +12,52 @@ define(['jquery', 'thorax', 'modernizr'], function($, Thorax) {
     return really;
   }
 
+  // Allows load:end and load:start events to propagate.
+  // to the application object.
+  Thorax.setRootObject(Application);
+
   // Hell yeah!
   init = function init() {
-    // Reject incompatible devices
+    // Reject incompatible devices.
     if(!compatible()) {
       alert('Oops! Seems like your device isn\'t compatible..');
       return false;
     }
 
-    // Create the Application object, Application.setView() will
-    // place a view inside the {{layout-element}} in
-    // templates/application.handlebars
-    var Application = window.Application = new Thorax.LayoutView({
-      name: 'application'
+    var $, Backbone;
+
+    // Load libs.
+    $ = Application.libs.$;
+    Backbone = Application.libs.Backbone;
+
+    // Start Backbone history.
+    Backbone.history.start({
+      pushState: true,
+      root: '/',
+      silent: true
     });
 
-    // Alias the special hashes for naming consistency
-    Application.templates = Thorax.templates;
-    Application.Views = Thorax.Views;
-    Application.Models = Thorax.Models;
-    Application.Collections = Thorax.Collections;
+    // Render template.
+    // Application.template = Thorax.templates.application;
+    // Application.appendTo('body');
 
-    // Allows load:end and load:start events to propagate
-    // to the application object
-    Thorax.setRootObject(Application);
+    // Dispatch.
+    Backbone.history.loadUrl();
 
-    $(function() {
-      // Application and other templates included by the base
-      // Application may want to use the link and url helpers
-      // which use hasPushstate, etc. so setup history, then
-      // render, then dispatch
-      Backbone.history.start({
-        pushState: false,
-        root: '/',
-        silent: true
-      });
-    // TODO: can remove after this is fixed:
-    // https://github.com/walmartlabs/lumbar/issues/84
-      Application.template = Thorax.templates.application;
-      Application.appendTo('body');
-      Backbone.history.loadUrl();
+    // Setup a[href] pushstate listeners
+    $(document).on('click', 'a:not([data-bypass])', function(e) {
+      var href, protocol;
+
+      // Get the anchor href and protocol.
+      href = $(this).prop('href');
+      protocol = this.protocol;
+
+      // Ensure relative url.
+      if(href && href.slice(0, protocol.length) !== protocol) {
+        e.preventDefault();
+
+        // Application.router.navigate(href, {trigger: true});
+      }
     });
   }
 

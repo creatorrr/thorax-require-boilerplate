@@ -26,7 +26,7 @@ define(['store'], function(store) {
     }
 
     key = this.namespace + this.separator + key;
-    return store(key, value);
+    return store.set(key, value);
   }
 
   return Store;
