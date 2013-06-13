@@ -14,6 +14,10 @@ require.config({
     'thorax': {
       deps: ['jquery', 'handlebars', 'backbone', 'underscore'],
       exports: 'Thorax'
+    },
+    'backbone': {
+      deps: ['jquery', 'underscore'],
+      exports: 'Backbone'
     }
   }
 });
