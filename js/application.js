@@ -18,6 +18,9 @@ require.config({
     'backbone': {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
+    },
+    'modernizr': {
+      exports: 'modernizr'
     }
   }
 });
