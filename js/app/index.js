@@ -1,7 +1,25 @@
 /* Index file. */
 
-define(['jquery', 'thorax'], function($, Thorax) {
-  var init = function init() {
+define(['jquery', 'thorax', 'modernizr'], function($, Thorax) {
+  // Declare vars.
+  var compatible, init;
+
+  // Check compatibility.
+  compatible = function compatible() {
+    var really = Modernizr.localstorage && JSON;
+    delete Modernizr;
+
+    return really;
+  }
+
+  // Hell yeah!
+  init = function init() {
+    // Reject incompatible devices
+    if(!compatible()) {
+      alert('Oops! Seems like your device isn\'t compatible..');
+      return false;
+    }
+
     // Create the Application object, Application.setView() will
     // place a view inside the {{layout-element}} in
     // templates/application.handlebars
@@ -35,7 +53,7 @@ define(['jquery', 'thorax'], function($, Thorax) {
       Application.appendTo('body');
       Backbone.history.loadUrl();
     });
-  };
+  }
 
   // Exports
   return init;

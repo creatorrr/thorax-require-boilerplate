@@ -8,7 +8,8 @@ require.config({
     'backbone': 'lib/backbone',
     'jquery': 'lib/jquery',
     'underscore': 'lib/underscore',
-    'modernizr': 'lib/modernizr'
+    'modernizr': 'lib/modernizr',
+    'store': 'lib/store'
   },
   shim: {
     'thorax': {
@@ -18,6 +19,9 @@ require.config({
     'backbone': {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
+    },
+    'modernizr': {
+      exports: 'modernizr'
     }
   }
 });
