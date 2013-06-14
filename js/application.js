@@ -22,6 +22,9 @@ require.config({
     },
     'modernizr': {
       exports: 'modernizr'
+    },
+    'app/templates': {
+      deps: ['handlebars']
     }
   }
 });
