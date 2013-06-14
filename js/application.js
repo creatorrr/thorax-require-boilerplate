@@ -13,7 +13,7 @@ require.config({
   },
   shim: {
     'thorax': {
-      deps: ['jquery', 'handlebars', 'backbone', 'underscore'],
+      deps: ['jquery', 'handlebars', 'backbone', 'underscore', 'app/templates'],
       exports: 'Thorax'
     },
     'backbone': {
