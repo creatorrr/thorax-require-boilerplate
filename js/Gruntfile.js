@@ -18,7 +18,18 @@ module.exports = function(grunt) {
         options: {
           namespace: 'Handlebars.templates',
           partialsUseNamespace: true,
-          amd: true
+          processName: function(filename) {
+            var key, dir, files, match, path;
+
+            files = grunt.config('handlebars.compile.files');
+            match = files[Object.keys(files)[0]][0];
+            dir = match.slice(0, match.lastIndexOf('/')+1);
+            path = filename.split(dir)[1];
+
+            key = path.split('.')[0];
+
+            return key;
+          }
         },
         files: {
           'app/templates.js': ['../templates/**.handlebars']

@@ -23,7 +23,7 @@ define(['app/utils/store', 'jquery', 'thorax', 'underscore', 'backbone'],
     Application.libs = {
       '$': $,
       'jQuery': $,
-      '_', _,
+      '_': _,
 
       'Backbone': Backbone
     };

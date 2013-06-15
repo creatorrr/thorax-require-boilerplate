@@ -38,8 +38,8 @@ define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
     });
 
     // Render template.
-    // Application.template = Thorax.templates.application;
-    // Application.appendTo('body');
+    Application.template = Thorax.templates.application;
+    Application.appendTo('body');
 
     // Dispatch.
     Backbone.history.loadUrl();
