@@ -3,7 +3,7 @@
 // Setup requirejs.
 require.config({
   paths: {
-    'thorax': 'lib/thorax-mobile',
+    'thorax': 'lib/thorax',
     'handlebars': 'lib/handlebars',
     'backbone': 'lib/backbone',
     'jquery': 'lib/jquery',

@@ -1,7 +1,7 @@
 /* Application namespace */
 
-define(['app/utils/store', 'jquery', 'thorax', 'underscore', 'backbone'],
-  function(Store, $, Thorax, _) {
+define(['app/utils/store', 'jquery', 'thorax', 'underscore', 'backbone', 'modernizr'],
+  function(Store, $, Thorax, _ /* FIXME: , Backbone, Modernizr */) {
 
     // Create the Application object, Application.setView() will
     // place a view inside the {{layout-element}}
@@ -14,18 +14,20 @@ define(['app/utils/store', 'jquery', 'thorax', 'underscore', 'backbone'],
     Application.Views = Thorax.Views;
     Application.Models = Thorax.Models;
     Application.Collections = Thorax.Collections;
-    Application.Store = Store;
 
     // Initialize main application store
-    Application.store = new Store('application');
+    Application.store = store = new Store('application');
 
     // Encapsulate libs
     Application.libs = {
       '$': $,
       'jQuery': $,
       '_': _,
+      'Modernizr': Modernizr,
+      'Backbone': Backbone,
+      'Thorax': Thorax,
 
-      'Backbone': Backbone
+      'Store': Store
     };
 
     return Application;

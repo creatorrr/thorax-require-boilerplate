@@ -1,5 +1,8 @@
 /* Gruntfile */
 module.exports = function(grunt) {
+  // Globals.
+  TEMPLATE_DIR = '../templates/';
+
   // Config.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -19,20 +22,16 @@ module.exports = function(grunt) {
           namespace: 'Handlebars.templates',
           partialsUseNamespace: true,
           processName: function(filename) {
-            var key, dir, files, match, path;
+            var key, path;
 
-            files = grunt.config('handlebars.compile.files');
-            match = files[Object.keys(files)[0]][0];
-            dir = match.slice(0, match.lastIndexOf('/')+1);
-            path = filename.split(dir)[1];
-
+            path = filename.split(TEMPLATE_DIR)[1];
             key = path.split('.')[0];
 
             return key;
           }
         },
         files: {
-          'app/templates.js': ['../templates/**.handlebars']
+          'app/templates.js': [TEMPLATE_DIR + '**.handlebars']
         }
       }
     }

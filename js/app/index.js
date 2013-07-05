@@ -1,12 +1,24 @@
 /* Index file. */
 
-define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
+define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
+
   // Declare vars.
-  var compatible, init;
+  var compatible, init, $, Thorax, Backbone, Modernizr, routers;
+
+  // Load libs.
+  $ = Application.libs.$;
+  Thorax = Application.libs.Thorax;
+  Backbone = Application.libs.Backbone;
+  Modernizr = Application.libs.Modernizr;
+
+  // Load Routers.
+  routers = [];
+  for(var i in arguments)
+    if(i > 0) routers.push(arguments[i]);
 
   // Check compatibility.
   compatible = function compatible() {
-    var really = Modernizr.localstorage && JSON;
+    var really = true; // Modernizr.localstorage && JSON;
     delete Modernizr;
 
     return really;
@@ -24,11 +36,9 @@ define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
       return false;
     }
 
-    var $, Backbone;
-
-    // Load libs.
-    $ = Application.libs.$;
-    Backbone = Application.libs.Backbone;
+    // Init routers.
+    Application.routers = [];
+    for(var i in routers) Application.routers.push(new routers[i]);
 
     // Start Backbone history.
     Backbone.history.start({

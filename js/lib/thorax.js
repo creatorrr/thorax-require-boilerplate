@@ -1,0 +1,1 @@
+../components/thorax/thorax.js
