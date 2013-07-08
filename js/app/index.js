@@ -11,10 +11,31 @@ define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
   Backbone = Application.libs.Backbone;
   Modernizr = Application.libs.Modernizr;
 
-  // Load Routers.
+  // Catch-all router. (Must be initialized before any other routers are initialized)
+  Application.router = new (Backbone.Router.extend({
+    routes: {
+      '*notFound': 'catchAll'
+    },
+    catchAll: function (notFound) {
+      var error;
+
+      // Render error page.
+      error = new Thorax.View({
+        template: Thorax.templates.error,
+        notFound: notFound
+      });
+
+      Application.setView(error);
+
+    }
+  }));
+
+  // Init Routers.
   routers = [];
   for(var i in arguments)
-    if(i > 0) routers.push(arguments[i]);
+    if(i > 0) routers.push(new arguments[i]);
+
+  Application.routers = routers;
 
   // Check compatibility.
   compatible = function compatible() {
@@ -36,9 +57,9 @@ define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
       return false;
     }
 
-    // Init routers.
-    Application.routers = [];
-    for(var i in routers) Application.routers.push(new routers[i]);
+    // Render template.
+    Application.template = Thorax.templates.application;
+    Application.appendTo('body');
 
     // Start Backbone history.
     Backbone.history.start({
@@ -46,10 +67,6 @@ define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
       root: '/',
       silent: true
     });
-
-    // Render template.
-    Application.template = Thorax.templates.application;
-    Application.appendTo('body');
 
     // Dispatch.
     Backbone.history.loadUrl();
@@ -59,14 +76,14 @@ define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
       var href, protocol;
 
       // Get the anchor href and protocol.
-      href = $(this).prop('href');
+      href = $(this).attr('href');
       protocol = this.protocol;
 
       // Ensure relative url.
       if(href && href.slice(0, protocol.length) !== protocol) {
         e.preventDefault();
 
-        // Application.router.navigate(href, {trigger: true});
+        Application.router.navigate(href, {trigger: true});
       }
     });
   }
