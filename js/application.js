@@ -30,6 +30,8 @@ require.config({
 });
 
 // Start application.
-require(['jquery', 'app/index'], function($, init) {
+require(['app/namespace', 'app/index'], function(Application, init) {
+  var $ = Application.libs.$;
+
   $(init);
 });
