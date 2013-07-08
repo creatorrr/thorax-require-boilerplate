@@ -1,12 +1,45 @@
 /* Index file. */
 
-define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
+define(['app/namespace' /* ,'modules/sample/router' */], function(Application) {
+
   // Declare vars.
-  var compatible, init;
+  var compatible, init, $, Thorax, Backbone, Modernizr, routers;
+
+  // Load libs.
+  $ = Application.libs.$;
+  Thorax = Application.libs.Thorax;
+  Backbone = Application.libs.Backbone;
+  Modernizr = Application.libs.Modernizr;
+
+  // Catch-all router. (Must be initialized before any other routers are initialized)
+  Application.router = new (Backbone.Router.extend({
+    routes: {
+      '*notFound': 'catchAll'
+    },
+    catchAll: function (notFound) {
+      var error;
+
+      // Render error page.
+      error = new Thorax.View({
+        template: Thorax.templates.error,
+        notFound: notFound
+      });
+
+      Application.setView(error);
+
+    }
+  }));
+
+  // Init Routers.
+  routers = [];
+  for(var i in arguments)
+    if(i > 0) routers.push(new arguments[i]);
+
+  Application.routers = routers;
 
   // Check compatibility.
   compatible = function compatible() {
-    var really = Modernizr.localstorage && JSON;
+    var really = true; // Modernizr.localstorage && JSON;
     delete Modernizr;
 
     return really;
@@ -24,11 +57,9 @@ define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
       return false;
     }
 
-    var $, Backbone;
-
-    // Load libs.
-    $ = Application.libs.$;
-    Backbone = Application.libs.Backbone;
+    // Render template.
+    Application.template = Thorax.templates.application;
+    Application.appendTo('body');
 
     // Start Backbone history.
     Backbone.history.start({
@@ -36,10 +67,6 @@ define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
       root: '/',
       silent: true
     });
-
-    // Render template.
-    Application.template = Thorax.templates.application;
-    Application.appendTo('body');
 
     // Dispatch.
     Backbone.history.loadUrl();
@@ -49,14 +76,14 @@ define(['app/namespace', 'thorax', 'modernizr'], function(Application, Thorax) {
       var href, protocol;
 
       // Get the anchor href and protocol.
-      href = $(this).prop('href');
+      href = $(this).attr('href');
       protocol = this.protocol;
 
       // Ensure relative url.
       if(href && href.slice(0, protocol.length) !== protocol) {
         e.preventDefault();
 
-        // Application.router.navigate(href, {trigger: true});
+        Application.router.navigate(href, {trigger: true});
       }
     });
   }
