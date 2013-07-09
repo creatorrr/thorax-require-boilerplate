@@ -1,1 +1,0 @@
-../components/store.js/store.js

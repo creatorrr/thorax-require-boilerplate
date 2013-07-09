@@ -1,1 +1,0 @@
-../components/thorax/thorax-mobile.js

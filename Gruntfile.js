@@ -3,11 +3,8 @@ module.exports = function(grunt) {
   // Globals.
   var TEMPLATE_DIR = 'templates/';
 
-  // Vars.
-  var modules;
-
   // Config.
-  grunt.initConfig({
+  grunt.config.init({
     config: {
       package: grunt.file.readJSON('package.json'),
       bower: grunt.file.readJSON('bower.json')
@@ -78,6 +75,30 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  grunt.config.set('copy', {
+
+    // Docs: (https://github.com/gruntjs/grunt-contrib-copy/blob/master/README.md)
+    builds: {
+      files: (function() {
+        var dest, pairs, out = [];
+
+        for(src in pairs = grunt.config('config.bower').alias) {
+          dest = pairs[src];
+          out.push({
+            src: src,
+            dest: dest + '.js'
+          });
+        }
+
+        return out;
+      })()
+    }
+
+  });
+
+  // Vars.
+  var modules;
 
   // Load plugins.
   modules = Object.keys(grunt.config('config.package').devDependencies);
