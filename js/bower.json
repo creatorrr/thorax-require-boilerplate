@@ -7,7 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "thorax": "*",
+    "thorax": ">= 2.0.0rc10",
     "underscore-amd": "*",
     "modernizr": "*",
     "requirejs": "*",
