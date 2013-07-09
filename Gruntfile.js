@@ -42,6 +42,17 @@ module.exports = function(grunt) {
       }
     },
 
+    // Docs: (https://github.com/gruntjs/grunt-contrib-stylus)
+    stylus: {
+      compile: {
+        options: {
+          'include css': true
+        },
+        files: {
+          './style.css': ['css/**.styl']
+        }
+      }
+    },
 
     // Docs: (https://github.com/yatskevich/grunt-bower-task/blob/master/README.md)
     bower: {
