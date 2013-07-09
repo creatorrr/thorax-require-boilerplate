@@ -1,0 +1,39 @@
+{
+    "name": "thorax-require-boilerplate",
+    "version": "0.1.0",
+
+    "description": "A simple boilerplate for writing thorax apps with requirejs.",
+
+    "devDependencies": {
+      "grunt": "0.4.x",
+      "grunt-cli": ">=0.1.6",
+
+      "grunt-contrib-clean": "*",
+      "grunt-contrib-coffee": "*",
+      "grunt-contrib-jshint": "*",
+      "grunt-contrib-uglify": "*",
+      "grunt-contrib-copy": "*",
+      "grunt-contrib-watch": "*",
+
+      "grunt-contrib-requirejs": "*",
+      "grunt-contrib-handlebars": "*",
+
+      "grunt-bower-task": "git://github.com/creatorrr/grunt-bower-task.git"
+    },
+
+    "repository": {
+      "type" : "git",
+      "url" : "http://github.com/creatorrr/thorax-require-boilerplate.git"
+    },
+
+    "scripts": {
+      "start": "node ./node_modules/grunt-cli/bin/grunt",
+      "setup": "node ./node_modules/grunt-cli/bin/grunt setup"
+    },
+
+    "private": true,
+
+    "engines": {
+      "node" : ">=0.8.0"
+    }
+}

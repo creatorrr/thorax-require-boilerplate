@@ -1,11 +1,14 @@
 {
-  "name": "milo",
-  "version": "0.0.1",
+  "name": "project",
+  "version": "0.0.0",
+
   "ignore": [
-    "**/.*",
     "node_modules",
-    "components"
+    ".gitignore",
+
+    "package.json"
   ],
+
   "dependencies": {
     "thorax": ">= 2.0.0rc10",
     "underscore-amd": "*",
