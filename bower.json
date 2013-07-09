@@ -9,6 +9,18 @@
     "package.json"
   ],
 
+  "alias": {
+    "js/components/backbone/backbone.js": "js/lib/backbone",
+    "js/components/handlebars/handlebars.js": "js/lib/handlebars",
+    "js/components/jquery/jquery.js": "js/lib/jquery",
+    "js/components/modernizr/modernizr.js": "js/lib/modernizr",
+    "js/components/requirejs/require.js": "js/lib/require",
+    "js/components/store.js/store.js": "js/lib/store",
+    "js/components/thorax/thorax.js": "js/lib/thorax",
+    "js/components/underscore-amd/underscore.js": "js/lib/underscore",
+    "js/components/zepto/zepto.js": "js/lib/zepto"
+  },
+
   "dependencies": {
     "thorax": ">= 2.0.0rc10",
     "underscore-amd": "*",
