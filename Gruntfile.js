@@ -73,7 +73,7 @@ module.exports = function(grunt) {
           name: 'application',
           baseUrl: "js",
           mainConfigFile: 'js/config.js',
-          out: "./<%= config.bower.name %>-<%= config.bower.version %>.js"
+          out: "./script.js"
         }
       }
     }
