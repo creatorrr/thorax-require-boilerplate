@@ -1,2 +1,6 @@
+# Bower downloads
+components
+
+# Node rubbish
 npm-debug.log
 node_modules

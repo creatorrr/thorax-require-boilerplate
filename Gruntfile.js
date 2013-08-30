@@ -1,7 +1,9 @@
 /* Gruntfile */
 module.exports = function(grunt) {
   // Globals.
-  var TEMPLATE_DIR = 'templates/';
+  var TEMPLATE_DIR = 'templates/',
+      COMPONENT_DIR = 'components/',
+      LIB_DIR = 'lib/';
 
   // Config.
   grunt.config.init({
@@ -34,19 +36,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'js/app/templates.js': [TEMPLATE_DIR + '**.handlebars']
-        }
-      }
-    },
-
-    // Docs: (https://github.com/gruntjs/grunt-contrib-stylus)
-    stylus: {
-      compile: {
-        options: {
-          'include css': true
-        },
-        files: {
-          './style.css': ['css/**.styl']
+          'app/templates.js': [TEMPLATE_DIR + '**.handlebars']
         }
       }
     },
@@ -55,7 +45,7 @@ module.exports = function(grunt) {
     bower: {
       install: {
         options: {
-          targetDir: 'js/components',
+          targetDir: 'components/',
           layout:    'byType',
           install:   true,
           cleanup:   true
@@ -68,8 +58,8 @@ module.exports = function(grunt) {
       compile: {
         options: {
           name: 'application',
-          baseUrl: "js",
-          mainConfigFile: 'js/config.js',
+          baseUrl: "/",
+          mainConfigFile: 'config.js',
           out: "./script.js"
         }
       }
@@ -86,8 +76,8 @@ module.exports = function(grunt) {
         for(src in pairs = grunt.config('config.bower').alias) {
           dest = pairs[src];
           out.push({
-            src: src,
-            dest: dest + '.js'
+            src: COMPONENT_DIR + src,
+            dest: LIB_DIR + dest + '.js'
           });
         }
 
@@ -108,6 +98,7 @@ module.exports = function(grunt) {
   });
 
   // Register tasks.
+  grunt.registerTask('setup', ['bower:install']);
   grunt.registerTask('default', ['handlebars', 'watch']);
 
-}
+};
