@@ -1,0 +1,6 @@
+# Bower downloads
+bower_components
+
+# Node rubbish
+npm-debug.log
+node_modules

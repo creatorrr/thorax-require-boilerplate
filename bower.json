@@ -1,9 +1,31 @@
 {
-  "name": "milo",
-  "version": "0.0.1",
+  "name": "project",
+  "version": "0.0.0",
+
   "ignore": [
-    "**/.*",
     "node_modules",
-    "components"
-  ]
+    ".gitignore",
+
+    "package.json"
+  ],
+
+  "alias": {
+    "handlebars/handlebars.js": "handlebars",
+    "jquery/jquery.js": "jquery",
+    "modernizr/modernizr.js": "modernizr",
+    "requirejs/require.js": "require",
+    "store.js/store.js": "store",
+    "thorax/thorax.js": "thorax",
+    "underscore-amd/underscore.js": "underscore"
+  },
+
+  "dependencies": {
+    "thorax": ">= 2.0.0",
+    "underscore-amd": "*",
+    "modernizr": "*",
+    "requirejs": "*",
+    "store.js": "*",
+    "jquery": "*",
+    "handlebars.js": "*"
+  }
 }
