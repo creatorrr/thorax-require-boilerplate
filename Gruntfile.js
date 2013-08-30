@@ -2,7 +2,7 @@
 module.exports = function(grunt) {
   // Globals.
   var TEMPLATE_DIR = 'templates/',
-      COMPONENT_DIR = 'components/',
+      COMPONENT_DIR = 'bower_components/',
       LIB_DIR = 'lib/';
 
   // Config.
@@ -37,18 +37,6 @@ module.exports = function(grunt) {
         },
         files: {
           'app/templates.js': [TEMPLATE_DIR + '**.handlebars']
-        }
-      }
-    },
-
-    // Docs: (https://github.com/yatskevich/grunt-bower-task/blob/master/README.md)
-    bower: {
-      install: {
-        options: {
-          targetDir: 'components/',
-          layout:    'byType',
-          install:   true,
-          cleanup:   true
         }
       }
     },
@@ -98,7 +86,7 @@ module.exports = function(grunt) {
   });
 
   // Register tasks.
-  grunt.registerTask('setup', ['bower:install']);
+  grunt.registerTask('setup', ['copy:builds']);
   grunt.registerTask('default', ['handlebars', 'watch']);
 
 };

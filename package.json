@@ -7,6 +7,7 @@
     "devDependencies": {
       "grunt": "0.4.x",
       "grunt-cli": ">=0.1.6",
+      "bower": "*",
 
       "grunt-contrib-clean": "*",
       "grunt-contrib-coffee": "*",
@@ -17,9 +18,7 @@
       "grunt-contrib-stylus": "*",
 
       "grunt-contrib-requirejs": "*",
-      "grunt-contrib-handlebars": "*",
-
-      "grunt-bower-task": "git://github.com/creatorrr/grunt-bower-task.git"
+      "grunt-contrib-handlebars": "*"
     },
 
     "repository": {
@@ -29,7 +28,7 @@
 
     "scripts": {
       "start": "node ./node_modules/grunt-cli/bin/grunt",
-      "setup": "node ./node_modules/grunt-cli/bin/grunt setup"
+      "setup": "node ./node_modules/bower/bin/bower install && node ./node_modules/grunt-cli/bin/grunt setup"
     },
 
     "private": true,
